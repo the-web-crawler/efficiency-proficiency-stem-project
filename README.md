@@ -1,1 +1,0 @@
-# efficiency-proficiency-stem-project
