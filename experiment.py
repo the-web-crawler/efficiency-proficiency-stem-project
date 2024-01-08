@@ -10,28 +10,6 @@ roundTo = 2
 # define a list of 256 items
 array = ['KO', 'JG', 'OA', 'PP', 'IF', 'FK', 'HN', 'AP', 'DE', 'KJ', 'AD', 'NI', 'OP', 'NA', 'CP', 'JD', 'AL', 'BD', 'KB', 'ND', 'EJ', 'EH', 'PC', 'DO', 'IE', 'HB', 'LE', 'GO', 'EL', 'DC', 'GB', 'PN', 'EF', 'DB', 'FG', 'PO', 'GJ', 'NM', 'NN', 'DD', 'OE', 'GP', 'LA', 'GL', 'KN', 'FA', 'GG', 'PH', 'NE', 'DG', 'OG', 'IK', 'AF', 'IC', 'BO', 'EM', 'HK', 'HM', 'EG', 'GF', 'EI', 'MH', 'BF', 'KE', 'EC', 'LH', 'ML', 'MK', 'BA', 'OO', 'BB', 'NP', 'MP', 'EB', 'AH', 'NK', 'KC', 'AE', 'OF', 'IG', 'LB', 'IM', 'IO', 'CG', 'JJ', 'LF', 'GM', 'HI', 'PG', 'JH', 'GC', 'DF', 'JF', 'IL', 'II', 'MA', 'PA', 'KM', 'CI', 'LP', 'BH', 'DL', 'DJ', 'CK', 'FH', 'FI', 'HP', 'MM', 'HA', 'MO', 'BE', 'FC', 'CE', 'OC', 'BG', 'IH', 'OH', 'JA', 'FD', 'PM', 'KP', 'MI', 'NH', 'OL', 'AI', 'CB', 'PJ', 'BJ', 'FF', 'JE', 'EA', 'JP', 'GA', 'DP', 'AO', 'ED', 'ME', 'CD', 'EE', 'KG', 'IA', 'HO', 'NJ', 'PB', 'AJ', 'GE', 'CJ', 'AN', 'BM', 'PE', 'EO', 'JB', 'CF', 'HD', 'FP', 'AG', 'PK', 'BI', 'KL', 'CA', 'FE', 'OD', 'GI', 'AB', 'GH', 'LO', 'DN', 'LJ', 'NL', 'LG', 'MF', 'NB', 'KF', 'FM', 'BC', 'DK', 'IP', 'OB', 'JK', 'FJ', 'EK', 'LL', 'PF', 'KD', 'BP', 'AA', 'MD', 'KA', 'LI', 'CN', 'JL', 'JM', 'HH', 'GD', 'LM', 'NG', 'AK', 'CH', 'PL', 'CO', 'MN', 'LN', 'HF', 'EP', 'OJ', 'ID', 'KK', 'DA', 'IJ', 'JN', 'MJ', 'JI', 'NF', 'HG', 'KH', 'DI', 'OM', 'GN', 'CL', 'MB', 'AC', 'FN', 'FB', 'BN', 'DM', 'HC', 'EN', 'GK', 'BK', 'BL', 'HL', 'PD', 'FO', 'IB', 'LC', 'CM', 'LD', 'JO', 'OK', 'KI', 'MC', 'FL', 'HE', 'LK', 'OI', 'MG', 'DH', 'PI', 'JC', 'CC', 'IN', 'NO', 'HJ', 'ON', 'AM', 'NC']
 
-# return which of two items comes first
-def first (item1, item2, index=0):
-    if (item1[index] == item2[index]):
-        newI = index+1
-        if newI == 2: return item1
-        return first(item1, item2, newI)
-    else:
-        if (ord(item1[index]) < ord(item2[index])):
-            return item1
-        else:
-            return item2
-
-# return which of two items comes last
-def last (item1, item2, index=0):
-    if (item1[index] == item2[index]):
-        return last(item1, item2, index+1)
-    else:
-        if (ord(item1[index]) < ord(item2[index])):
-            return item2
-        else:
-            return item1
-
 # return time in milliseconds it takes to run a function one hundred times
 def printMS (fString, name):
     print (f"{name}: {round(timeit.timeit(fString + '(array)', setup='from __main__ import array, ' + fString, number=trials)/trials*1000, roundTo)} ms")
@@ -47,7 +25,7 @@ def insertion (list):
         # ...search in the temporary list for where it belongs, then insert it there
         loopLength = range(len(tempArray))
         for i in loopLength:
-            if (first(item, tempArray[i]) == item):
+            if (item < tempArray[i]):
                 tempArray.insert(i, item)
                 break
         # insert the first item into the temporary list to get started
@@ -71,10 +49,10 @@ def bubble (list):
             completed = True
         nI = i+1
         # if the current item and the item on the right need to be swaped, swap them, and continue the loop
-        if (first (tempList[i], tempList[nI]) == tempList[nI]):
+        if (tempList[i] > tempList[nI]):
             tempList[i], tempList[nI] = tempList[nI], tempList[i]
             completed = False
-        # if the loop was never continued, then the temporary array is now sorted
+        # if the loop was never continued, then the temporary list is now sorted
         if (completed and i == 254): break
     return tempList
 
@@ -90,7 +68,7 @@ def mergesort (useList):
             if len(l2) == 0:
                 return returnList + l1
             # add the first item out of the two in the first positions of the lists
-            f = first(l1[0], l2[0])
+            f = l1[0] if l1[0] < l2[0] else l2[0]
             returnList.append(f)
             # remove the item that was just added
             if f == l1[0]:
@@ -113,34 +91,44 @@ def mergesort (useList):
     return tempList[0]
 
 def gnome (list):
+    # create a temporary list that is a copy of the unsorted list
     tempList = list[:]
+    # loop through each two items until the end is reached
     index = 0
     while index != len(tempList) - 1:
-        if first(tempList[index], tempList[index + 1]) == tempList[index]:
+        # if the items are in the correct order, compare the next two
+        if tempList[index] < tempList[index + 1]:
             index += 1
+        # if the items are not in the correct order, swap them and compare the previous two
         else:
             tempList[index], tempList[index+1] = tempList[index+1], tempList[index]
+
             # The next three lines are very satisfying to watch in a terminal :)
             # print("\n\n\n\n\n")
             # print(tempList)
             # time.sleep(0.001)
+
+            # if there are no previous two items to compare, compare the next two instead
             if (index == 0):
                 index = 1
             else:
                 index -= 1
+    # the temporary list is now sorted
     return tempList
 
 def selection (list):
+    # create a temporary list that is a copy of the unsorted list 
     tempList = list[:]
-    index = 0
-    while index < len(tempList) - 2:
+    # while the second to last item has not been swapped...
+    for index in range(len(tempList) - 2):
+        # find minimum number
         min = index
         for i in range(index + 1, len(tempList)):
-            if tempList[min] != first(tempList[min], tempList[i]):
+            if tempList[i] < tempList[min]:
                 min = i
+        # swap the current item with the minimum unsorted item
         tempList[index], tempList[min] = tempList[min], tempList[index]
-        index += 1
-            
+    # the temporary list is now sorted
     return tempList
 
 # show output
