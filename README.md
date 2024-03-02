@@ -1,4 +1,4 @@
-*This repository contains the final report of the STEM project "Efficiency Proficiency" and the file "experiment.py", which was used to conduct the experiment.*
+*This repository contains a modified version of the final report of the STEM project "Efficiency Proficiency", along with the file "experiment.py", which was used to conduct the experiment.*
 
 # EFFICIENCY PROFICIENCY
 
@@ -56,15 +56,11 @@ The problem in this project is to answer this: “Of the insertion, bubble, merg
 Table one shows the expected time complexity of the algorithms in Big-O notation. In Big-O notation, _n_ represents the number of items in the list to be sorted. Though this notation can’t be directly converted into units such as seconds, it shows how fast sorting time grows proportionally to the size of the list.
 
 | **Algorithm:** | **Insertion Sort** | **Bubble Sort** | **Merge Sort** | **Gnome Sort** | **Selection Sort** |
-| --- | --- | --- | --- | --- | --- |
+| :---: | :---: | :---: | :---: | :---: | :---: |
 | Average Time Complexity: | Quadratic | Quadratic | Linearithmic | Quadratic | Quadratic |
-| --- | --- | --- | --- | --- | --- |
 | Average: | O(n<sup>2</sup>) | O(n<sup>2</sup>) | O(n log n) | O(n<sup>2</sup>) | O(n<sup>2</sup>) |
-| --- | --- | --- | --- | --- | --- |
 | Worst: | O(n<sup>2</sup>) | O(n<sup>2</sup>) | O(n log n) | O(n<sup>2</sup>) | O(n<sup>2</sup>) |
-| --- | --- | --- | --- | --- | --- |
 | Best: | O(n) | O(n) | O(n log n) | O(n) | O(n<sup>2</sup>) |
-| --- | --- | --- | --- | --- | --- |
 
 Figure one shows the average time elapsed of each algorithm for each trial in milliseconds.
 
