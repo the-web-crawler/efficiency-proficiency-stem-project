@@ -66,9 +66,9 @@ Table one shows the expected time complexity of the algorithms in Big-O notation
 
 Figure one shows the average time elapsed of each algorithm for each trial in milliseconds.
 
-![Figure One]()
+![Figure One](https://raw.githubusercontent.com/the-web-crawler/efficiency-proficiency-stem-project/main/res/bar_graph.png)
 
-Figure two shows the average time elapsed of each algorithm for each trial in percentages.![Average Time Elapsed in Percentages]()
+Figure two shows the average time elapsed of each algorithm for each trial in percentages.![Average Time Elapsed in Percentages](https://raw.githubusercontent.com/the-web-crawler/efficiency-proficiency-stem-project/main/res/pie_chart.png)
 
 ## Discussion
 
