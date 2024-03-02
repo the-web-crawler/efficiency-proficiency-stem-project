@@ -1,3 +1,5 @@
+*This repository contains the final report of the STEM project "Efficiency Proficiency" and the file "experiment.py", which was used to conduct the experiment.*
+
 # EFFICIENCY PROFICIENCY
 
 ALEXANDER RODRIGUEZ
